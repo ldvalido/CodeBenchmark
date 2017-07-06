@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<project name="Hello World" default="buildTarget" basedir=".">
+
+	<property name="buildFolder" value="..\Build" />
+	<property name="date" value="" />
+	<description>CodeBenchmark Project.</description>
+
+	
+	<target name="startupTarget" description="Remove all generated files">
+		<tstamp verbose="true">
+			<formatter property="date" pattern="yyyyMMdd"/>
+		</tstamp>
+		<property name="buildFolder" value="${buildFolder}\${date}" verbose="true"/>
+	</target>
+	
+	<target name="cleanTarget" description="Remove all generated files">
+		<delete dir="${buildFolder}\" failonerror="true" />
+	</target>
+
+	<target name="nUnitTarget">
+		<nunit2>
+			 <formatter type="Xml" usefile="true" extension=".xml" outputdir="${buildFolder}" /> 
+			<test assemblyname="${buildFolder}\CodeBenchmark.Testing.dll"/>
+		</nunit2>
+	</target>
+
+	<target name="internalBuildTarget" description="compiles the source code" depends="cleanTarget">
+		<mkdir dir="${buildFolder}"/>
+		<solution configuration="release" solutionfile="..\CodeBenchmark.sln" outputdir="${buildFolder}"/>
+	</target>
+
+	<target name="cleanAfterInternalBuildTarget" description="clean temporal files" dependes="internalBuildTarget">
+		<delete dir="..\CodeBenchmark\obj" failonerror="true" verbose="false"/>
+		<delete dir="..\CodeBenchmark\bin" failonerror="true" verbose="false"/>
+		<delete dir="..\CodeBenchmark.Testing\obj" failonerror="true" verbose="false"/>
+		<delete dir="..\CodeBenchmark.Testing\bin" failonerror="true" verbose="false"/>
+		<delete verbose="true">
+			<fileset>
+				<include name="${buildFolder}\*.pdb" />
+				<!--Why System data is included in the compilation process? -->
+				<include name="${buildFolder}\System.Data.dll" />
+				<include name="${buildFolder}\nunit.framework.dll" />
+				<include name="${buildFolder}\CodeBenchmark.Testing.dll" />
+			</fileset>
+		</delete>
+	</target>
+	<target name="debugTarget">
+		<sleep hours="0" minutes="0" seconds="10" milliseconds="0" />
+	</target>
+	<target name="buildTarget">
+		<call target="startupTarget"/>
+		<!-- <call target="debugTarget"/> -->
+		<call target="internalBuildTarget"/>
+		<!-- <call target="nUnitTarget"/> -->
+		<call target="cleanAfterInternalBuildTarget"/>
+	</target>
+
+
+</project>

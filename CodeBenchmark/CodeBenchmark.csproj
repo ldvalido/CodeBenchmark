@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D83A1EC6-B1A2-48BC-B40B-6E07E1F2CD32}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CodeBenchmark</RootNamespace>
+    <AssemblyName>CodeBenchmark</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodeBenchmarkManager.cs" />
+    <Compile Include="Configuration\ConfiguratorContext.cs" />
+    <Compile Include="Configuration\IConfigurator.cs" />
+    <Compile Include="Configuration\MemoryConfiguration.cs" />
+    <Compile Include="Configuration\XMLConfigurator.cs" />
+    <Compile Include="Model\CodeBenchmarkConfig.cs" />
+    <Compile Include="Model\CodeBenchmarkMark.cs" />
+    <Compile Include="Model\CodeBenchmarkReportConfig.cs" />
+    <Compile Include="Model\CodeBenchmarkReportInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportGeneration\CSVRenderFile.cs" />
+    <Compile Include="ReportGeneration\CSVReportGeneration.cs" />
+    <Compile Include="ReportGeneration\ReportGenerationContext.cs" />
+    <Compile Include="ReportGeneration\IReportGeneration.cs" />
+    <Compile Include="ReportGeneration\XMLReportGeneration.cs" />
+    <Compile Include="Utils\FileSystemHelper.cs" />
+    <Compile Include="Utils\ListExtentionMethods.cs" />
+    <Compile Include="Utils\SerializationHelper.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
